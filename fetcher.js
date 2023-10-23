@@ -33,14 +33,9 @@ The version of the HTTP protocol.
 Optional headers that convey additional information for the servers.
 A body, for some methods like POST, similar to those in responses, which contain the resource sent.
  */
-
-//https://medium.com/@shangrz/sending-synchronous-http-requests-with-node-js-f3f91bcfba9f AKA Callback hell
-
 //https://www.w3schools.com/js/js_callback.asp
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
-
-//https://stackoverflow.com/questions/2496710/writing-to-files-in-node-js
 
 //PsuedoCode
 
@@ -52,17 +47,19 @@ const fs = require('fs/promises');
 
 //get the portion the url needed
 const args = process.argv.slice(2); //just returning the file path (example.edu)
-const url = args[0];// use this 
-const fileSaveAt = args[i]; //at this location (step 2)
 
 // ✔️ create a get request a connection with example.edu maanage async elements with callbacks.
 
 //Step 1 make a GET Request
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
 
-const request = require('request');
+const request = require('request'); //UnhandledPromiseRejectionWarning?
 request('http://example.edu', (error, response, body) => {
-  console.log('error:', error); // Print the error if one occurred
+  try {
+    console.log('There seems to be an error:', error); // Print the error if one occurred
+  } catch ({ err }) {
+    console.log('Everything is working!');
+  }
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   console.log('body:', body); // Print the HTML for the example.edu/ homepage.
 });
@@ -70,17 +67,21 @@ request('http://example.edu', (error, response, body) => {
   //Step 2 write the file 
 //following example from node on writing files
 
-const content = 'Some content!';
+const content = body.length;
+//can I make this a callback to log the data perhaps?
 
-fs.writeFile('/Users/joe/test.txt', content, err => {
+const filePath = './lighthouse/page-fetcher2/fetcher.txt';
+// ~ denotes home directory . denotes directory
+
+  //saves to this current file directory and folder appends new txt file of data
+fs.writeFile(filePath, content, err => {
   if (err) {
-    console.error(err);
+    console.error('Error could not write to file: ', err);
   }
   // file written successfully
-  const fileSize = fileSize.length;
-console.log('Downloaded and saved ${fileSize} bytes to ${filePath}'); 
+// const fileSize = content.length;
+console.log('Downloaded and saved ${content} bytes to ${filePath}'); 
 });
-
 
 //Possible errors to handle
   //Should add a few try and catch test or statements for these errors ?
