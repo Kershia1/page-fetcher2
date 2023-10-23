@@ -55,46 +55,41 @@ A body, for some methods like POST, similar to those in responses, which contain
 const request = require('request');
 const fs = require('fs.promises');
 
-
-
-// // ✔️ establish a connection
-// const conn = net.createConnection({
-//   host: 'example.edu',
-//   Port: 80
-// });
-// conn.setEncoding('UTF8');
-
 //get the portion the url needed
-const args = process.argv.slice(2); //just returning the file path 
+const args = process.argv.slice(2); //just returning the file path (example.edu)
 const url = args[0];// use this 
-const fileSaveAt = args[i]; //at this location 
+const fileSaveAt = args[i]; //at this location (step 2)
 
-// ✔️ create a get request a connection with example.edu or an async promise req?
+// ✔️ create a get request a connection with example.edu maanage async elements with callbacks.
 
 //Step 1 make a GET Request
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
 
-//log connection
-  //additional little function added to convert all characters to bytes. Question would this also include the count of white spaces or should I remove those as well. 
+const request = require('request');
+request('http://example.edu', (error, response, body) => {
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('body:', body); // Print the HTML for the example.edu/ homepage.
+});
 
-const fileSize = fileSize.length;
+  //Step 2 write the file 
+//following example from node on writing files
+
+const fs = require('fs');
+
+const content = 'Some content!';
+
+fs.writeFile('/Users/joe/test.txt', content, err => {
+  if (err) {
+    console.error(err);
+  }
+  // file written successfully
+  const fileSize = fileSize.length;
 console.log('Downloaded and saved ${fileSize} bytes to ${filePath}'); 
-
-//Overthinking
-  // const count = () => {
-  //   let arr = '', 
-  //   let i = 0;
-  //   for(arr of array) {
-  //     if(i <arr.length); 
-  //     countBytes = arr.length(i); 
-  //     countBytes ++; 
-  //   }
-  //   return countBytes.concat.
-  // }
+});
 
 
-
-  //Should add a few try and catch test or statements for these errors 
+  //Should add a few try and catch test or statements for these errors ?
    // No site locates 
    //this is the wrong location 
    //request could not be completed due to connection error
