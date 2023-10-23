@@ -18,10 +18,6 @@ Downloaded and saved 3261 bytes to ./index.htm
 Required Tools: 
 Node request library 
 Node FS library to write file 
-
-using this tutorial https://www.freecodecamp.org/news/node-js-async-await-tutorial-with-asynchronous-javascript-examples/
-
-to help understand async fs requests. very lost between 2 lesson plans
 */
 
 //References
@@ -47,13 +43,12 @@ A body, for some methods like POST, similar to those in responses, which contain
 //https://stackoverflow.com/questions/2496710/writing-to-files-in-node-js
 
 //PsuedoCode
-//
+
 // ✔️ download and install request library 
 
 // ✔️ require request library 
-//already includes my net library
-const request = require('request');
-const fs = require('fs.promises');
+
+const fs = require('fs/promises');
 
 //get the portion the url needed
 const args = process.argv.slice(2); //just returning the file path (example.edu)
@@ -75,8 +70,6 @@ request('http://example.edu', (error, response, body) => {
   //Step 2 write the file 
 //following example from node on writing files
 
-const fs = require('fs');
-
 const content = 'Some content!';
 
 fs.writeFile('/Users/joe/test.txt', content, err => {
@@ -89,6 +82,7 @@ console.log('Downloaded and saved ${fileSize} bytes to ${filePath}');
 });
 
 
+//Possible errors to handle
   //Should add a few try and catch test or statements for these errors ?
    // No site locates 
    //this is the wrong location 
