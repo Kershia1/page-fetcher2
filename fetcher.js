@@ -2,6 +2,7 @@
 Project Guidelines:
 1) will recieve URL and Local Path as CLI's 
   These will download resource to URL to machine 
+  code to run: node fetcher.js http://www.example.edu/ ./index.html
   
   Expected Printed Output:
   > node fetcher.js http://www.example.edu/ ./index.html
@@ -18,49 +19,78 @@ Required Tools:
 Node request library 
 Node FS library to write file 
 
+using this tutorial https://www.freecodecamp.org/news/node-js-async-await-tutorial-with-asynchronous-javascript-examples/
+
+to help understand async fs requests. very lost between 2 lesson plans
 */
+
+//References
+
+//remeber html body request
+/**
+ * Requests consist of the following elements:
+
+An HTTP method, usually a verb like GET, POST, or a noun like OPTIONS or HEAD that defines the operation the client wants to perform. Typically, a client wants to fetch a resource (using GET) or post the value of an HTML form (using POST), though more operations may be needed in other cases.
+The path of the resource to fetch; 
+the URL of the resource stripped from elements that are obvious from the context, for example without the protocol (http://), the domain (here, developer.mozilla.org), or the TCP port (here, 80).
+The version of the HTTP protocol.
+Optional headers that convey additional information for the servers.
+A body, for some methods like POST, similar to those in responses, which contain the resource sent.
+ */
+
+//https://medium.com/@shangrz/sending-synchronous-http-requests-with-node-js-f3f91bcfba9f AKA Callback hell
+
+//https://www.w3schools.com/js/js_callback.asp
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
+//https://stackoverflow.com/questions/2496710/writing-to-files-in-node-js
 
 //PsuedoCode
 //
 // ✔️ download and install request library 
 
 // ✔️ require request library 
+//already includes my net library
 const request = require('request');
-const net = require('net');
-const fs = require('fs/promises');
+const fs = require('fs.promises');
 
-// ✔️ establish a connection
-const conn = net.createConnection({
-  host: 'example.edu',
-  Port: 80
-});
-conn.setEncoding('UTF8');
 
-// ✔️ needed to ask for the async function to be be explained at a juniour dev level to understand certain aspects of what has happening at the await section.
+
+// // ✔️ establish a connection
+// const conn = net.createConnection({
+//   host: 'example.edu',
+//   Port: 80
+// });
+// conn.setEncoding('UTF8');
+
+//get the portion the url needed
+const args = process.argv.slice(2); //just returning the file path 
+const url = args[0];// use this 
+const fileSaveAt = args[i]; //at this location 
+
 // ✔️ create a get request a connection with example.edu or an async promise req?
-const fetcher() =>{
-  try {
-    const content = 'Downloaded and saved ${} to: ';//what is written to the file
-    await fs.writeFile('', content);//pause, wait for fs.writeFile, bool if T over write with new, if F create with new content.
-  } catch (err) {
-    console.log(err);
-  }
-  }
-fetcher(); //start file writing function and handle errors
+
+//Step 1 make a GET Request
+//https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET
 
 //log connection
   //additional little function added to convert all characters to bytes. Question would this also include the count of white spaces or should I remove those as well. 
 
-  const count = () => {
-    let arr = '', 
-    let i = 0;
-    for(arr of array) {
-      if(i <arr.length); 
-      countBytes = arr.length(i); 
-      countBytes ++; 
-    }
-    return countBytes.concat.
-  }
+const fileSize = fileSize.length;
+console.log('Downloaded and saved ${fileSize} bytes to ${filePath}'); 
+
+//Overthinking
+  // const count = () => {
+  //   let arr = '', 
+  //   let i = 0;
+  //   for(arr of array) {
+  //     if(i <arr.length); 
+  //     countBytes = arr.length(i); 
+  //     countBytes ++; 
+  //   }
+  //   return countBytes.concat.
+  // }
 
 
 
